@@ -1,5 +1,6 @@
 {
   "name": "HA Hidden Launcher",
   "render_type": "module",
-  "filename": "ha-hidden-launcher.js"
+  "filename": "ha-hidden-launcher.js",
+  "content_in_root": true
 }
