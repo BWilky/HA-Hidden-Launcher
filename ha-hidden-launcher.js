@@ -347,17 +347,17 @@ function defineCard(LitElement, html, css) {
         }
 
         .popup-content {
-          background: rgba(26, 26, 32, 0.85);
+          background: var(--paper-dialog-background-color, var(--ha-card-background, var(--card-background-color, var(--primary-background-color, #ffffff))));
           backdrop-filter: blur(25px) saturate(180%);
           -webkit-backdrop-filter: blur(25px) saturate(180%);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: 1px solid var(--divider-color, rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.12));
           border-radius: 24px;
           padding: 32px 24px;
-          color: #ffffff;
+          color: var(--primary-text-color, #212121);
           display: flex;
           flex-direction: column;
           align-items: center;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+          box-shadow: var(--dialog-box-shadow, 0 25px 50px -12px rgba(0, 0, 0, 0.4));
           transform: scale(0.9) translateY(20px);
           opacity: 0;
           transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease-out;
@@ -390,7 +390,7 @@ function defineCard(LitElement, html, css) {
 
         .popup-subtitle {
           font-size: 13px;
-          color: rgba(255, 255, 255, 0.45);
+          color: var(--secondary-text-color, rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.6));
           font-family: var(--paper-font-body1_-_font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
         }
 
@@ -413,29 +413,29 @@ function defineCard(LitElement, html, css) {
           width: 12px;
           height: 12px;
           border-radius: 50%;
-          border: 2px solid rgba(255, 255, 255, 0.25);
+          border: 2px solid var(--divider-color, rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.25));
           background: transparent;
           transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .pin-dot.filled {
-          background: #ffffff;
-          border-color: #ffffff;
+          background: var(--primary-text-color, #212121);
+          border-color: var(--primary-text-color, #212121);
           transform: scale(1.15);
-          box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+          box-shadow: 0 0 8px rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.3);
         }
 
         .pin-dot.success {
-          background: #10b981;
-          border-color: #10b981;
-          box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+          background: var(--success-color, #10b981);
+          border-color: var(--success-color, #10b981);
+          box-shadow: 0 0 10px rgba(var(--rgb-success-color, 16, 185, 129), 0.4);
           transform: scale(1.2);
         }
 
         .pin-dot.error {
-          background: #ef4444;
-          border-color: #ef4444;
-          box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+          background: var(--error-color, #ef4444);
+          border-color: var(--error-color, #ef4444);
+          box-shadow: 0 0 10px rgba(var(--rgb-error-color, 239, 68, 68), 0.4);
           transform: scale(1.2);
         }
 
@@ -452,9 +452,9 @@ function defineCard(LitElement, html, css) {
           width: 60px;
           height: 60px;
           border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          background: rgba(255, 255, 255, 0.03);
-          color: #ffffff;
+          border: 1px solid var(--divider-color, rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.08));
+          background: rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.03);
+          color: var(--primary-text-color, #212121);
           font-size: 24px;
           font-weight: 500;
           cursor: pointer;
@@ -468,12 +468,12 @@ function defineCard(LitElement, html, css) {
         }
 
         .pinpad-btn:hover {
-          background: rgba(255, 255, 255, 0.09);
-          border-color: rgba(255, 255, 255, 0.18);
+          background: rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.08);
+          border-color: rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.18);
         }
 
         .pinpad-btn:active {
-          background: rgba(255, 255, 255, 0.18);
+          background: rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.15);
           transform: scale(0.92);
         }
 
@@ -485,15 +485,15 @@ function defineCard(LitElement, html, css) {
         }
 
         .pinpad-btn.action-btn:hover {
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.05);
         }
 
         .pinpad-btn.action-btn.cancel {
-          color: #ef4444;
+          color: var(--error-color, #ef4444);
         }
 
         .pinpad-btn.action-btn.delete {
-          color: rgba(255, 255, 255, 0.55);
+          color: var(--secondary-text-color, rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.6));
         }
 
         /* Animations */
