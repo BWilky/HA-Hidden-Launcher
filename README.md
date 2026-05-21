@@ -13,13 +13,13 @@ This card reuses Home Assistant's internal Lit library to minimize resource load
 
 ## Installation
 
-1. Copy `hidden-launcher-card.js` to your Home Assistant configuration directory under `www/`:
-   `/config/www/hidden-launcher-card.js`
+1. Copy `ha-hidden-launcher.js` to your Home Assistant configuration directory under `www/`:
+   `/config/www/ha-hidden-launcher.js`
 2. Add the file as a Dashboard resource:
    - Go to Settings > Dashboards.
    - Select Resources from the overflow menu.
    - Click Add Resource.
-   - Set the URL to `/local/hidden-launcher-card.js` and select JavaScript Module as the type.
+   - Set the URL to `/local/ha-hidden-launcher.js` and select JavaScript Module as the type.
 3. Refresh the dashboard.
 
 ## Configuration
