@@ -36,6 +36,7 @@ This card reuses Home Assistant's internal Lit library to minimize resource load
 | `tap_window` | number | `1000` | Time window (in milliseconds) between taps to count as consecutive. |
 | `title` | string | `"Enter PIN"` | The title shown on the PIN pad popup. |
 | `subtitle` | string | Optional | Subtitle text shown below the title. |
+| `timeout` | number | `30` | Inactivity timeout (in seconds) before the popup automatically closes. Set to `0` to disable. |
 
 ## Examples
 
