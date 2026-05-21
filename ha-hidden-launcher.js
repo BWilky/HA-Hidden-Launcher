@@ -62,8 +62,10 @@ function defineCard(LitElement, html, css) {
       this._lastTapTime = 0;
       this._status = "idle"; // 'idle', 'success', 'error'
       this._openedTime = 0;
+      this._inactivityTimer = null;
       this._childCard = null;
       this._handleTapCapture = this._handleTapCapture.bind(this);
+      this._resetInactivityTimer = this._resetInactivityTimer.bind(this);
     }
 
     setConfig(config) {
@@ -104,6 +106,7 @@ function defineCard(LitElement, html, css) {
 
     disconnectedCallback() {
       this.removeEventListener("click", this._handleTapCapture, { capture: true });
+      this._stopInactivityTimer();
       super.disconnectedCallback();
     }
 
@@ -140,6 +143,7 @@ function defineCard(LitElement, html, css) {
         this._enteredPin = "";
         this._status = "idle";
         this._openedTime = Date.now();
+        this._startInactivityTimer();
         this.requestUpdate();
 
         // Allow DOM to render then open dialog using native showModal
@@ -157,6 +161,7 @@ function defineCard(LitElement, html, css) {
     }
 
     _closePopup() {
+      this._stopInactivityTimer();
       const dialog = this.shadowRoot.getElementById("pin-dialog");
       const content = this.shadowRoot.querySelector(".popup-content");
 
@@ -177,6 +182,27 @@ function defineCard(LitElement, html, css) {
         }
         this.requestUpdate();
       }, 200);
+    }
+
+    _startInactivityTimer() {
+      this._stopInactivityTimer();
+      const timeoutInSeconds = this._config.timeout !== undefined ? this._config.timeout : 30;
+      if (timeoutInSeconds <= 0) return;
+
+      this._inactivityTimer = setTimeout(() => {
+        this._closePopup();
+      }, timeoutInSeconds * 1000);
+    }
+
+    _stopInactivityTimer() {
+      if (this._inactivityTimer) {
+        clearTimeout(this._inactivityTimer);
+        this._inactivityTimer = null;
+      }
+    }
+
+    _resetInactivityTimer() {
+      this._startInactivityTimer();
     }
 
     _handleBackdropClick(event) {
@@ -278,7 +304,7 @@ function defineCard(LitElement, html, css) {
           ${this._childCard || html`<div class="loading">Loading card...</div>`}
           
           ${this._showPopup ? html`
-            <dialog id="pin-dialog" @click=${this._handleBackdropClick}>
+            <dialog id="pin-dialog" @click=${this._handleBackdropClick} @pointerdown=${this._resetInactivityTimer}>
               <div class="popup-content ${this._status === 'error' ? 'shake' : ''} ${this._status === 'success' ? 'success' : ''}">
                 <div class="popup-header">
                   <div class="popup-title">${this._config.title || "Enter PIN"}</div>
