@@ -61,6 +61,7 @@ function defineCard(LitElement, html, css) {
       this._tapCount = 0;
       this._lastTapTime = 0;
       this._status = "idle"; // 'idle', 'success', 'error'
+      this._openedTime = 0;
       this._childCard = null;
       this._handleTapCapture = this._handleTapCapture.bind(this);
     }
@@ -138,6 +139,7 @@ function defineCard(LitElement, html, css) {
         this._showPopup = true;
         this._enteredPin = "";
         this._status = "idle";
+        this._openedTime = Date.now();
         this.requestUpdate();
 
         // Allow DOM to render then open dialog using native showModal
@@ -145,6 +147,7 @@ function defineCard(LitElement, html, css) {
           const dialog = this.shadowRoot.getElementById("pin-dialog");
           if (dialog) {
             dialog.showModal();
+            this._openedTime = Date.now();
           }
         }, 50);
       } else {
@@ -177,6 +180,10 @@ function defineCard(LitElement, html, css) {
     }
 
     _handleBackdropClick(event) {
+      // Ignore click if it occurs within 1 second of opening the dialog
+      if (Date.now() - this._openedTime < 1000) {
+        return;
+      }
       // Native dialog backdrop is click target when clicking outside the content container
       if (event.target === event.currentTarget) {
         this._closePopup();
