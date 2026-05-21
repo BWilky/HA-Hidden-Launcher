@@ -368,6 +368,8 @@ function defineCard(LitElement, html, css) {
           transform: scale(0.9) translateY(20px);
           opacity: 0;
           transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease-out;
+          user-select: none;
+          -webkit-user-select: none;
         }
 
         dialog[open] .popup-content {
@@ -470,6 +472,8 @@ function defineCard(LitElement, html, css) {
           align-items: center;
           transition: background-color 0.15s, border-color 0.15s, transform 0.1s, color 0.15s;
           user-select: none;
+          -webkit-user-select: none;
+          outline: none;
           -webkit-tap-highlight-color: transparent;
           font-family: inherit;
         }
